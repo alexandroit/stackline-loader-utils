@@ -1,6 +1,6 @@
 # @stackline/loader-utils
 
-Maintained, dependency-free utilities for webpack loaders. This package preserves the public CommonJS API and behavior of `loader-utils@3.3.1`, including legacy deep imports.
+Maintained utilities for webpack loaders. This package preserves the current `loader-utils@3.3.1` API while retaining the legacy helper surface required by `loader-utils@2.0.4` consumers, including Webpack 4 loaders and deep imports.
 
 [![npm version](https://img.shields.io/npm/v/%40stackline%2Floader-utils)](https://www.npmjs.com/package/@stackline/loader-utils)
 [![CI](https://github.com/alexandroit/stackline-loader-utils/actions/workflows/ci.yml/badge.svg)](https://github.com/alexandroit/stackline-loader-utils/actions/workflows/ci.yml)
@@ -10,10 +10,10 @@ Maintained, dependency-free utilities for webpack loaders. This package preserve
 
 The upstream `webpack/loader-utils` repository was archived in March 2025. Stackline maintains this fork so projects can retain the established API while using an actively tested package with:
 
-- zero production dependencies;
+- one pinned, zero-transitive production dependency with documented maintenance evidence;
 - clean direct and legacy-name installations;
 - zero known npm audit vulnerabilities;
-- regression and differential tests against `loader-utils@3.3.1`;
+- regression and differential tests against `loader-utils@2.0.4` and `3.3.1`;
 - Node.js 12.13 through current Node.js compatibility checks;
 - TypeScript declarations validated with TypeScript 3.9 and current TypeScript;
 - reproducible release artifacts, SBOMs and immutable GitHub releases.
@@ -100,11 +100,11 @@ loaderUtils.getHashDigest(
 | Runtime | Node.js 12.13+ |
 | Modules | CommonJS, dynamic ESM import |
 | TypeScript | 3.9 and current |
-| Baseline | `loader-utils@3.3.1` |
+| Baselines | `loader-utils@2.0.4` helpers and `3.3.1` current API |
 | Deep imports | Preserved |
-| Production dependencies | 0 |
+| Production dependencies | `json5@2.2.3` (0 transitive) |
 
-The scoped package uses its own `1.x` release line. `@stackline/loader-utils@1.0.0` corresponds to the maintained `loader-utils@3.3.1` API baseline.
+The scoped package uses its own `1.x` release line. `@stackline/loader-utils@1.0.1` is the first release suitable for both current API consumers and loaders that still invoke the retained `getOptions` path.
 
 ## Verification
 
@@ -119,6 +119,7 @@ The release gate runs linting, the complete upstream suite, differential compati
 
 - [Migration guide](MIGRATION.md)
 - [Compatibility policy](COMPATIBILITY.md)
+- [Production dependency review](DEPENDENCY_REVIEW.md)
 - [Security policy](SECURITY.md)
 - [Public documentation](https://alexandro.net/docs/vanilla/loader-utils/)
 

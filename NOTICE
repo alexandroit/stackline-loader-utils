@@ -5,7 +5,8 @@ originally developed by Tobias Koppers, the JS Foundation and other
 contributors.
 
 Upstream source: https://github.com/webpack/loader-utils
-Upstream baseline: loader-utils 3.3.1, commit 06fcc0aac9928779d5e2e0fdc58dddd5d4c49ea3
+Upstream baselines: loader-utils 3.3.1, commit 06fcc0aac9928779d5e2e0fdc58dddd5d4c49ea3,
+and retained helper APIs from loader-utils 2.0.4.
 
 The original MIT copyright and permission notice are preserved in LICENSE.
 Stackline is not affiliated with or endorsed by webpack or the JS Foundation.

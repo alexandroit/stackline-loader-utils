@@ -31,6 +31,13 @@ export interface InterpolateNameOptions {
 }
 
 export interface LoaderContext {
+  context?: string;
+  currentRequest?: string;
+  loaderIndex?: number;
+  loaders?: Array<{ request: string; [key: string]: unknown }>;
+  query?: string | Record<string, unknown> | null;
+  remainingRequest?: string;
+  resource?: string;
   resourcePath?: string;
   resourceQuery?: string;
   options?: {
@@ -50,6 +57,12 @@ export type InterpolateNameFunction = (
   resourceQuery: string | undefined
 ) => string;
 
+export function getCurrentRequest(loaderContext: LoaderContext): string;
+
+export function getOptions(loaderContext: LoaderContext): Record<string, unknown>;
+
+export function getRemainingRequest(loaderContext: LoaderContext): string;
+
 export function getHashDigest(
   buffer: string | Buffer,
   hashType?: HashAlgorithm,
@@ -64,5 +77,14 @@ export function interpolateName(
 ): string;
 
 export function isUrlRequest(url: string): boolean;
+
+export function parseQuery(query: string): Record<string, unknown>;
+
+export function parseString(value: string): string;
+
+export function stringifyRequest(
+  loaderContext: LoaderContext,
+  request: string
+): string;
 
 export function urlToRequest(url: string, root?: string | boolean): string;

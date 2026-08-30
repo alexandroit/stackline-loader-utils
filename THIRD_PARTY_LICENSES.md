@@ -2,7 +2,11 @@
 
 ## Production Dependencies
 
-None.
+| Component | License | Shipped text |
+| --- | --- | --- |
+| json5 2.2.3 | MIT | `licenses/json5-2.2.3-MIT.txt` |
+
+`json5` is installed as a separate npm package and retains its own license. A complete copy is shipped for reproducible review.
 
 ## Derived Source
 

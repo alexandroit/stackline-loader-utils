@@ -15,10 +15,10 @@ Include the affected version, runtime, minimal reproduction, impact and any know
 
 ## Dependency Standard
 
-The published package has zero production dependencies. Every release gate still performs clean-install, recursive tree and npm advisory checks so this guarantee cannot regress unnoticed.
+The published package has one exact production dependency, `json5@2.2.3`, with zero transitive dependencies. Its maintenance evidence and review expiry are recorded in [DEPENDENCY_REVIEW.md](DEPENDENCY_REVIEW.md). Every release gate performs clean-install, recursive tree, license inventory and npm advisory checks.
 
 ## Security Baseline
 
-The source begins from `loader-utils@3.3.1`, which includes the upstream ReDoS correction released in `3.2.1`. Regression coverage exercises multi-megabyte malformed URL input under a hard process deadline and verifies that attacker-shaped objects do not mutate `Object.prototype`.
+The source begins from `loader-utils@3.3.1`, which includes the upstream ReDoS correction released in `3.2.1`. Retained query helpers reject `__proto__`, `prototype` and `constructor`. Regression coverage exercises multi-megabyte malformed URL input under a hard process deadline and verifies that attacker-shaped objects do not mutate `Object.prototype`.
 
 User-provided `options.regExp` is executable regular-expression configuration and should only be supplied by trusted loader configuration, matching the upstream contract.

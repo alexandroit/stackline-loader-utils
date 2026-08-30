@@ -2,17 +2,24 @@
 
 const assert = require("node:assert/strict");
 const { describe, it } = require("node:test");
-const baseline = require("loader-utils-baseline");
+const baselineV2 = require("loader-utils-v2-baseline");
+const baselineV3 = require("loader-utils-v3-baseline");
 const maintained = require("../");
 
 const publicMethods = [
+  "getCurrentRequest",
   "getHashDigest",
+  "getOptions",
+  "getRemainingRequest",
   "interpolateName",
   "isUrlRequest",
+  "parseQuery",
+  "parseString",
+  "stringifyRequest",
   "urlToRequest",
 ];
 
-function compare(method, args) {
+function compare(baseline, method, args) {
   let baselineResult;
   let baselineError;
   let maintainedResult;
@@ -38,10 +45,15 @@ function compare(method, args) {
   assert.deepEqual(maintainedResult, baselineResult);
 }
 
-describe("loader-utils 3.3.1 compatibility", () => {
-  it("exports the same public method names", () => {
-    assert.deepEqual(Object.keys(maintained).sort(), Object.keys(baseline).sort());
+describe("loader-utils compatibility", () => {
+  it("exports the v3 API plus retained v2 compatibility helpers", () => {
     assert.deepEqual(Object.keys(maintained).sort(), publicMethods.sort());
+    for (const method of Object.keys(baselineV3)) {
+      assert.equal(typeof maintained[method], typeof baselineV3[method]);
+    }
+    for (const method of Object.keys(baselineV2)) {
+      assert.equal(typeof maintained[method], typeof baselineV2[method]);
+    }
   });
 
   it("matches URL classification and request conversion", () => {
@@ -60,9 +72,9 @@ describe("loader-utils 3.3.1 compatibility", () => {
     ];
 
     for (const value of values) {
-      compare("isUrlRequest", [value]);
-      compare("urlToRequest", [value]);
-      compare("urlToRequest", [value, "/root"]);
+      compare(baselineV3, "isUrlRequest", [value]);
+      compare(baselineV3, "urlToRequest", [value]);
+      compare(baselineV3, "urlToRequest", [value, "/root"]);
     }
   });
 
@@ -70,7 +82,7 @@ describe("loader-utils 3.3.1 compatibility", () => {
     const content = Buffer.from("Stackline compatibility fixture", "utf8");
     for (const algorithm of ["xxhash64", "md4", "md5", "sha1", "sha256"]) {
       for (const digest of ["hex", "base64", "base52", "base64safe"]) {
-        compare("getHashDigest", [content, algorithm, digest, 16]);
+        compare(baselineV3, "getHashDigest", [content, algorithm, digest, 16]);
       }
     }
   });
@@ -89,8 +101,41 @@ describe("loader-utils 3.3.1 compatibility", () => {
 
     for (const context of contexts) {
       for (const template of templates) {
-        compare("interpolateName", [context, template, { content: "fixture" }]);
+        compare(baselineV3, "interpolateName", [
+          context,
+          template,
+          { content: "fixture" },
+        ]);
       }
+    }
+  });
+
+  it("matches v2 loader option and request helpers", () => {
+    const objectOptions = { sourceMap: true, root: "/assets" };
+    const contexts = [
+      { query: objectOptions },
+      { query: "?sourceMap=true&root=%2Fassets&items[]=a&items[]=b" },
+      { query: "?{sourceMap:true,root:'/assets'}" },
+      { query: "" },
+      {},
+    ];
+    for (const context of contexts) compare(baselineV2, "getOptions", [context]);
+
+    const loaderContext = {
+      context: "/project",
+      loaderIndex: 1,
+      loaders: [{ request: "a" }, { request: "b" }, { request: "c" }],
+      resource: "/project/input.scss",
+    };
+    compare(baselineV2, "getCurrentRequest", [loaderContext]);
+    compare(baselineV2, "getRemainingRequest", [loaderContext]);
+    compare(baselineV2, "stringifyRequest", [
+      loaderContext,
+      "/project/loader.js?x=1!/project/input.scss",
+    ]);
+
+    for (const value of ['"quoted"', "'single'", "plain", "broken\\"] ) {
+      compare(baselineV2, "parseString", [value]);
     }
   });
 });

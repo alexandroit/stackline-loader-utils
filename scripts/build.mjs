@@ -2,7 +2,10 @@ import { createHash } from "node:crypto";
 import { mkdir, readFile, writeFile } from "node:fs/promises";
 
 const sourceFiles = [
+  "lib/getCurrentRequest.js",
   "lib/getHashDigest.js",
+  "lib/getOptions.js",
+  "lib/getRemainingRequest.js",
   "lib/hash/BatchedHash.js",
   "lib/hash/BulkUpdateDecorator.js",
   "lib/hash/md4.js",
@@ -11,6 +14,9 @@ const sourceFiles = [
   "lib/index.js",
   "lib/interpolateName.js",
   "lib/isUrlRequest.js",
+  "lib/parseQuery.js",
+  "lib/parseString.js",
+  "lib/stringifyRequest.js",
   "lib/urlToRequest.js",
 ];
 

@@ -1,7 +1,7 @@
 {
   "name": "@stackline/loader-utils",
-  "version": "1.0.0",
-  "description": "Maintained, dependency-free loader utilities compatible with loader-utils 3.3.1",
+  "version": "1.0.1",
+  "description": "Maintained loader utilities compatible with loader-utils 2.0.4 and 3.3.1 consumers",
   "type": "commonjs",
   "main": "./lib/index.js",
   "types": "./index.d.ts",
@@ -11,7 +11,9 @@
     "index.d.ts",
     "CHANGELOG.md",
     "COMPATIBILITY.md",
+    "DEPENDENCY_REVIEW.md",
     "LICENSE",
+    "licenses",
     "MIGRATION.md",
     "NOTICE",
     "README.md",
@@ -30,10 +32,11 @@
     "test:coverage": "c8 --all --include='lib/**/*.js' --check-coverage --lines 95 --functions 95 --branches 90 node --test test/*.test.js",
     "test:smoke": "node scripts/smoke-install.mjs",
     "check:package": "publint && attw --pack .",
+    "check:licenses": "node scripts/check-licenses.mjs",
     "pack:check": "npm pack --dry-run",
     "audit:dependencies": "npm audit --omit=dev --audit-level=low",
     "audit:all": "npm audit --audit-level=low",
-    "verify": "npm run clean && npm run lint && npm run build && npm test && npm run test:coverage && npm run test:smoke && npm run check:package && npm run pack:check && npm run audit:dependencies && npm run audit:all",
+    "verify": "npm run clean && npm run lint && npm run build && npm test && npm run test:coverage && npm run test:smoke && npm run check:package && npm run check:licenses && npm run pack:check && npm run audit:dependencies && npm run audit:all",
     "prepack": "npm run build"
   },
   "repository": {
@@ -65,13 +68,16 @@
   "publishConfig": {
     "access": "public"
   },
-  "dependencies": {},
+  "dependencies": {
+    "json5": "2.2.3"
+  },
   "devDependencies": {
     "@arethetypeswrong/cli": "0.18.5",
     "@types/node": "12.20.55",
     "c8": "12.0.0",
     "eslint": "10.9.1",
-    "loader-utils-baseline": "npm:loader-utils@3.3.1",
+    "loader-utils-v2-baseline": "npm:loader-utils@2.0.4",
+    "loader-utils-v3-baseline": "npm:loader-utils@3.3.1",
     "publint": "0.3.24",
     "typescript": "7.0.2",
     "typescript-3-9": "npm:typescript@3.9.10"

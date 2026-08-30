@@ -1,5 +1,6 @@
 import loaderUtils = require("../..");
 
+const options = loaderUtils.getOptions({ query: "?sourceMap=true" });
 const digest: string = loaderUtils.getHashDigest(
   Buffer.from("content"),
   "sha256",
@@ -15,5 +16,6 @@ const filename: string = loaderUtils.interpolateName(
 );
 
 void digest;
+void options;
 void requestable;
 void filename;

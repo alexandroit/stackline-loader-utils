@@ -7,7 +7,14 @@ updates:
     groups:
       development-tooling:
         dependency-type: development
+    ignore:
+      - dependency-name: "@types/node"
+      - dependency-name: "loader-utils-v2-baseline"
+      - dependency-name: "loader-utils-v3-baseline"
+      - dependency-name: "typescript-3-9"
   - package-ecosystem: github-actions
     directory: /
     schedule:
       interval: weekly
+    ignore:
+      - dependency-name: "github/codeql-action"

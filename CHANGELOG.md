@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.0.1] - 2026-08-30
+
+### Added
+
+- Restored the `loader-utils@2.0.4` helper APIs required by Webpack 4 loader paths while preserving the `3.3.1` current API behavior.
+- Added differential coverage against both upstream baselines.
+- Added recursive unsafe-key filtering for `__proto__`, `prototype` and `constructor` in query parsing.
+- Pinned `json5@2.2.3`, documented current maintenance evidence, shipped its complete MIT license and verified the exact one-package production closure.
+
+### Changed
+
+- Raised the Stackline package version after the Verdaccio-only `1.0.0` preflight artifact exposed the missing Webpack 4 compatibility path.
+
 ## [1.0.0] - 2026-08-30
 
 ### Added
