@@ -76,7 +76,7 @@ export function interpolateName(
   options?: InterpolateNameOptions
 ): string;
 
-export function isUrlRequest(url: string): boolean;
+export function isUrlRequest(url: string, root?: string | boolean): boolean;
 
 export function parseQuery(query: string): Record<string, unknown>;
 

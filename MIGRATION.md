@@ -7,7 +7,7 @@ Replace the registry dependency with an npm alias:
 ```json
 {
   "dependencies": {
-    "loader-utils": "npm:@stackline/loader-utils@1.0.1"
+    "loader-utils": "npm:@stackline/loader-utils@1.0.2"
   }
 }
 ```
@@ -25,7 +25,7 @@ New code can depend directly on the maintained package:
 ```json
 {
   "dependencies": {
-    "@stackline/loader-utils": "1.0.1"
+    "@stackline/loader-utils": "1.0.2"
   }
 }
 ```
@@ -36,7 +36,7 @@ const loaderUtils = require("@stackline/loader-utils");
 
 ## Compatibility Baseline
 
-The `1.0.x` Stackline line preserves the four current exports and behavior of `loader-utils@3.3.1`. It also retains `getOptions`, `parseQuery`, `stringifyRequest`, `getRemainingRequest`, `getCurrentRequest` and `parseString` from `loader-utils@2.0.4`, allowing existing Webpack 4 loader paths to migrate without source changes.
+The `1.0.x` Stackline line targets the complete `loader-utils@2.0.4` contract: all ten root exports, export order, overlapping URL/hash behavior, JSON5 query parsing, emoji interpolation and deep imports. This allows existing Webpack 4 loader paths to migrate without source changes.
 
 ## Lockfile Verification
 

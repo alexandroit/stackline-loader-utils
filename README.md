@@ -1,6 +1,6 @@
 # @stackline/loader-utils
 
-Maintained utilities for webpack loaders. This package preserves the current `loader-utils@3.3.1` API while retaining the legacy helper surface required by `loader-utils@2.0.4` consumers, including Webpack 4 loaders and deep imports.
+Maintained, security-hardened utilities for webpack loaders. This package preserves the complete public API and behavior of `loader-utils@2.0.4`, including Webpack 4 option parsing and legacy deep imports.
 
 [![npm version](https://img.shields.io/npm/v/%40stackline%2Floader-utils)](https://www.npmjs.com/package/@stackline/loader-utils)
 [![CI](https://github.com/alexandroit/stackline-loader-utils/actions/workflows/ci.yml/badge.svg)](https://github.com/alexandroit/stackline-loader-utils/actions/workflows/ci.yml)
@@ -10,10 +10,10 @@ Maintained utilities for webpack loaders. This package preserves the current `lo
 
 The upstream `webpack/loader-utils` repository was archived in March 2025. Stackline maintains this fork so projects can retain the established API while using an actively tested package with:
 
-- one pinned, zero-transitive production dependency with documented maintenance evidence;
+- two pinned leaf dependencies with documented current maintenance evidence;
 - clean direct and legacy-name installations;
 - zero known npm audit vulnerabilities;
-- regression and differential tests against `loader-utils@2.0.4` and `3.3.1`;
+- exhaustive differential tests against `loader-utils@2.0.4` and downstream Webpack 4/5 builds;
 - Node.js 12.13 through current Node.js compatibility checks;
 - TypeScript declarations validated with TypeScript 3.9 and current TypeScript;
 - reproducible release artifacts, SBOMs and immutable GitHub releases.
@@ -43,6 +43,15 @@ const loaderUtils = require("loader-utils");
 ```
 
 ## API
+
+### Loader context helpers
+
+`getOptions`, `parseQuery`, `stringifyRequest`, `getRemainingRequest`, `getCurrentRequest` and `parseString` retain their `loader-utils@2.0.4` signatures and behavior. Query parsing additionally ignores `__proto__`, `prototype` and `constructor` keys.
+
+```js
+const options = loaderUtils.getOptions(this);
+const request = loaderUtils.stringifyRequest(this, this.resourcePath);
+```
 
 ### `isUrlRequest(url)`
 
@@ -100,11 +109,11 @@ loaderUtils.getHashDigest(
 | Runtime | Node.js 12.13+ |
 | Modules | CommonJS, dynamic ESM import |
 | TypeScript | 3.9 and current |
-| Baselines | `loader-utils@2.0.4` helpers and `3.3.1` current API |
+| Baseline | Complete `loader-utils@2.0.4` API |
 | Deep imports | Preserved |
-| Production dependencies | `json5@2.2.3` (0 transitive) |
+| Production dependencies | `emojis-list@3.0.0`, `json5@2.2.3` (both leaf packages) |
 
-The scoped package uses its own `1.x` release line. `@stackline/loader-utils@1.0.1` is the first release suitable for both current API consumers and loaders that still invoke the retained `getOptions` path.
+The scoped package uses its own `1.x` release line. `@stackline/loader-utils@1.0.2` is the first public-release candidate validated against the complete `2.0.4` contract and real `resolve-url-loader` Webpack 4/5 builds.
 
 ## Verification
 

@@ -2,8 +2,7 @@
 
 const assert = require("node:assert/strict");
 const { describe, it } = require("node:test");
-const baselineV2 = require("loader-utils-v2-baseline");
-const baselineV3 = require("loader-utils-v3-baseline");
+const baseline = require("loader-utils-baseline");
 const maintained = require("../");
 
 const publicMethods = [
@@ -45,14 +44,11 @@ function compare(baseline, method, args) {
   assert.deepEqual(maintainedResult, baselineResult);
 }
 
-describe("loader-utils compatibility", () => {
-  it("exports the v3 API plus retained v2 compatibility helpers", () => {
+describe("loader-utils 2.0.4 compatibility", () => {
+  it("exports the same public method names", () => {
     assert.deepEqual(Object.keys(maintained).sort(), publicMethods.sort());
-    for (const method of Object.keys(baselineV3)) {
-      assert.equal(typeof maintained[method], typeof baselineV3[method]);
-    }
-    for (const method of Object.keys(baselineV2)) {
-      assert.equal(typeof maintained[method], typeof baselineV2[method]);
+    for (const method of Object.keys(baseline)) {
+      assert.equal(typeof maintained[method], typeof baseline[method]);
     }
   });
 
@@ -72,17 +68,18 @@ describe("loader-utils compatibility", () => {
     ];
 
     for (const value of values) {
-      compare(baselineV3, "isUrlRequest", [value]);
-      compare(baselineV3, "urlToRequest", [value]);
-      compare(baselineV3, "urlToRequest", [value, "/root"]);
+      compare(baseline, "isUrlRequest", [value]);
+      compare(baseline, "isUrlRequest", [value, "/root"]);
+      compare(baseline, "urlToRequest", [value]);
+      compare(baseline, "urlToRequest", [value, "/root"]);
     }
   });
 
   it("matches digest generation", () => {
     const content = Buffer.from("Stackline compatibility fixture", "utf8");
-    for (const algorithm of ["xxhash64", "md4", "md5", "sha1", "sha256"]) {
-      for (const digest of ["hex", "base64", "base52", "base64safe"]) {
-        compare(baselineV3, "getHashDigest", [content, algorithm, digest, 16]);
+    for (const algorithm of ["md4", "md5", "sha1", "sha256"]) {
+      for (const digest of ["hex", "base64", "base26", "base52", "base62"]) {
+        compare(baseline, "getHashDigest", [content, algorithm, digest, 16]);
       }
     }
   });
@@ -96,12 +93,12 @@ describe("loader-utils compatibility", () => {
     const templates = [
       "[name].[ext]",
       "[path][name].[contenthash:8].[ext][query]",
-      "[folder]/[sha256:hash:base64safe:12].[ext]",
+      "[folder]/[sha256:hash:base64:12].[ext]",
     ];
 
     for (const context of contexts) {
       for (const template of templates) {
-        compare(baselineV3, "interpolateName", [
+        compare(baseline, "interpolateName", [
           context,
           template,
           { content: "fixture" },
@@ -119,7 +116,7 @@ describe("loader-utils compatibility", () => {
       { query: "" },
       {},
     ];
-    for (const context of contexts) compare(baselineV2, "getOptions", [context]);
+    for (const context of contexts) compare(baseline, "getOptions", [context]);
 
     const loaderContext = {
       context: "/project",
@@ -127,15 +124,15 @@ describe("loader-utils compatibility", () => {
       loaders: [{ request: "a" }, { request: "b" }, { request: "c" }],
       resource: "/project/input.scss",
     };
-    compare(baselineV2, "getCurrentRequest", [loaderContext]);
-    compare(baselineV2, "getRemainingRequest", [loaderContext]);
-    compare(baselineV2, "stringifyRequest", [
+    compare(baseline, "getCurrentRequest", [loaderContext]);
+    compare(baseline, "getRemainingRequest", [loaderContext]);
+    compare(baseline, "stringifyRequest", [
       loaderContext,
       "/project/loader.js?x=1!/project/input.scss",
     ]);
 
     for (const value of ['"quoted"', "'single'", "plain", "broken\\"] ) {
-      compare(baselineV2, "parseString", [value]);
+      compare(baseline, "parseString", [value]);
     }
   });
 });

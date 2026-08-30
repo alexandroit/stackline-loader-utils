@@ -2,6 +2,25 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.0.2] - 2026-08-30
+
+### Fixed
+
+- Restored the complete `loader-utils@2.0.4` contract, including export order and the original `isUrlRequest`, `urlToRequest`, hashing, interpolation and option-parsing semantics required by real Webpack 4 loaders.
+- Replaced the mixed `2.0.4`/`3.3.1` behavior from the Verdaccio-only `1.0.1` preflight after downstream `resolve-url-loader` tests exposed an incompatible non-file URL classification.
+- Preserved `2.0.4` custom-base hash output without `big.js` through a native encoder verified across algorithms, bases and truncation lengths.
+
+### Security
+
+- Ported the linear-time URL and hash hardening from the later upstream line without changing the `2.0.4` public outputs.
+- Recursively ignores `__proto__`, `prototype` and `constructor` in parsed and object-form loader options.
+- Pins the complete production closure to maintained leaf packages `emojis-list@3.0.0` and `json5@2.2.3`, with exact license checks and zero known npm audit findings.
+
+### Compatibility
+
+- Added exhaustive differential tests against an independently installed `loader-utils@2.0.4` and downstream Webpack 4/5 release gates.
+- Retains CommonJS, dynamic ESM import, published deep imports, Node.js 12.13+ and TypeScript 3.9 declarations.
+
 ## [1.0.1] - 2026-08-30
 
 ### Added
