@@ -113,7 +113,7 @@ loaderUtils.getHashDigest(
 | Deep imports | Preserved |
 | Production dependencies | `emojis-list@3.0.0`, `json5@2.2.3` (both leaf packages) |
 
-The scoped package uses its own `1.x` release line. `@stackline/loader-utils@1.0.2` is the first public-release candidate validated against the complete `2.0.4` contract and real `resolve-url-loader` Webpack 4/5 builds.
+The scoped package uses its own `1.x` release line. `@stackline/loader-utils@1.0.2` is the first public release, validated against the complete `2.0.4` contract and real `resolve-url-loader` Webpack 4/5 builds.
 
 ## Verification
 
