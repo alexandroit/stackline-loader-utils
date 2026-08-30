@@ -1,6 +1,20 @@
 # Changelog
 
-All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
+All notable changes to this project will be documented in this file.
+
+## [1.0.0] - 2026-08-30
+
+### Added
+
+- First Stackline release based on `loader-utils@3.3.1`.
+- Warning-free direct and legacy-name installation gates with recursive dependency and npm advisory verification.
+- TypeScript declarations tested with TypeScript 3.9 and current TypeScript.
+- Differential compatibility, security, ESM and package-boundary tests.
+- Public maintenance, migration, compatibility, provenance and security documentation.
+
+### Preserved
+
+- The complete upstream CommonJS API, behavior, deep imports, Node.js 12.13 floor, source history and MIT attribution.
 
 ### [3.3.1](https://github.com/webpack/loader-utils/compare/v3.3.0...v3.3.1) (2024-06-05)
 

@@ -1,35 +1,79 @@
 {
-  "name": "loader-utils",
-  "version": "3.3.1",
-  "author": "Tobias Koppers @sokra",
-  "description": "utils for webpack loaders",
-  "dependencies": {},
+  "name": "@stackline/loader-utils",
+  "version": "1.0.0",
+  "description": "Maintained, dependency-free loader utilities compatible with loader-utils 3.3.1",
+  "type": "commonjs",
+  "main": "./lib/index.js",
+  "types": "./index.d.ts",
+  "sideEffects": false,
+  "files": [
+    "lib",
+    "index.d.ts",
+    "CHANGELOG.md",
+    "COMPATIBILITY.md",
+    "LICENSE",
+    "MIGRATION.md",
+    "NOTICE",
+    "README.md",
+    "SECURITY.md",
+    "THIRD_PARTY_LICENSES.md"
+  ],
   "scripts": {
-    "lint": "prettier --list-different . && eslint .",
-    "pretest": "yarn lint",
-    "test": "jest",
-    "test:only": "jest --coverage",
-    "test:ci": "yarn test:only",
-    "release": "yarn test && standard-version"
+    "clean": "node scripts/clean.mjs",
+    "build": "node scripts/build.mjs",
+    "lint": "eslint lib test scripts",
+    "test:upstream": "node --test test/getHashDigest.test.js test/interpolateName.test.js test/isUrlRequest.test.js test/urlToRequest.test.js",
+    "test:compatibility": "node --test test/compatibility.test.js test/security.test.js",
+    "test:esm": "node test/esm.mjs",
+    "test:types": "node node_modules/typescript-3-9/bin/tsc -p test/types/tsconfig.legacy.json && node node_modules/typescript/bin/tsc -p test/types/tsconfig.modern.json",
+    "test": "npm run test:upstream && npm run test:compatibility && npm run test:esm && npm run test:types",
+    "test:coverage": "c8 --all --include='lib/**/*.js' --check-coverage --lines 95 --functions 95 --branches 90 node --test test/*.test.js",
+    "test:smoke": "node scripts/smoke-install.mjs",
+    "check:package": "publint && attw --pack .",
+    "pack:check": "npm pack --dry-run",
+    "audit:dependencies": "npm audit --omit=dev --audit-level=low",
+    "audit:all": "npm audit --audit-level=low",
+    "verify": "npm run clean && npm run lint && npm run build && npm test && npm run test:coverage && npm run test:smoke && npm run check:package && npm run pack:check && npm run audit:dependencies && npm run audit:all",
+    "prepack": "npm run build"
   },
-  "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/webpack/loader-utils.git"
+    "url": "git+https://github.com/alexandroit/stackline-loader-utils.git"
   },
+  "homepage": "https://alexandro.net/docs/vanilla/loader-utils/",
+  "bugs": {
+    "url": "https://github.com/alexandroit/stackline-loader-utils/issues"
+  },
+  "keywords": [
+    "webpack",
+    "loader",
+    "loader-utils",
+    "hash",
+    "interpolate-name",
+    "build-tools",
+    "stackline"
+  ],
+  "author": "Stackline Maintainers",
+  "contributors": [
+    "Tobias Koppers",
+    "JS Foundation and other contributors"
+  ],
+  "license": "MIT",
   "engines": {
-    "node": ">= 12.13.0"
+    "node": ">=12.13.0"
   },
+  "publishConfig": {
+    "access": "public"
+  },
+  "dependencies": {},
   "devDependencies": {
-    "coveralls": "^3.1.1",
-    "eslint": "^8.0.1",
-    "eslint-plugin-node": "^11.1.0",
-    "jest": "^27.3.1",
-    "prettier": "^2.4.1",
-    "standard-version": "^9.3.2"
-  },
-  "main": "lib/index.js",
-  "files": [
-    "lib"
-  ]
+    "@arethetypeswrong/cli": "0.18.5",
+    "@types/node": "12.20.55",
+    "c8": "12.0.0",
+    "eslint": "10.9.1",
+    "loader-utils-baseline": "npm:loader-utils@3.3.1",
+    "publint": "0.3.24",
+    "typescript": "7.0.2",
+    "typescript-3-9": "npm:typescript@3.9.10"
+  }
 }

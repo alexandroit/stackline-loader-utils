@@ -1,0 +1,70 @@
+export default [
+  {
+    ignores: ["coverage/**", "dist/**", "node_modules/**"],
+  },
+  {
+    files: ["lib/**/*.js", "test/**/*.js"],
+    languageOptions: {
+      ecmaVersion: 2021,
+      sourceType: "commonjs",
+      globals: {
+        Buffer: "readonly",
+        console: "readonly",
+        process: "readonly",
+        setTimeout: "readonly",
+      },
+    },
+    linterOptions: {
+      reportUnusedDisableDirectives: "error",
+    },
+    rules: {
+      "no-constant-condition": "error",
+      "no-control-regex": "error",
+      "no-dupe-args": "error",
+      "no-dupe-else-if": "error",
+      "no-dupe-keys": "error",
+      "no-func-assign": "error",
+      "no-import-assign": "error",
+      "no-irregular-whitespace": "error",
+      "no-loss-of-precision": "error",
+      "no-obj-calls": "error",
+      "no-promise-executor-return": "error",
+      "no-prototype-builtins": "error",
+      "no-self-assign": "error",
+      "no-setter-return": "error",
+      "no-shadow-restricted-names": "error",
+      "no-sparse-arrays": "error",
+      "no-unexpected-multiline": "error",
+      "no-unreachable": "error",
+      "no-unreachable-loop": "error",
+      "no-unsafe-finally": "error",
+      "no-unsafe-negation": "error",
+      "no-unused-labels": "error",
+      "no-unused-private-class-members": "error",
+      "no-unused-vars": ["error", { "args": "none" }],
+      "no-useless-backreference": "error",
+      "no-useless-catch": "error",
+      "no-useless-escape": "error",
+      "no-with": "error",
+      "require-yield": "error",
+      "use-isnan": "error",
+      "valid-typeof": "error"
+    },
+  },
+  {
+    files: ["scripts/**/*.mjs", "test/**/*.mjs"],
+    languageOptions: {
+      ecmaVersion: 2022,
+      sourceType: "module",
+      globals: {
+        Buffer: "readonly",
+        console: "readonly",
+        process: "readonly",
+        URL: "readonly",
+      },
+    },
+    rules: {
+      "no-unused-vars": ["error", { "args": "none" }],
+    },
+  },
+];

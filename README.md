@@ -1,167 +1,127 @@
-# loader-utils
+# @stackline/loader-utils
 
-## Methods
+Maintained, dependency-free utilities for webpack loaders. This package preserves the public CommonJS API and behavior of `loader-utils@3.3.1`, including legacy deep imports.
 
-### `urlToRequest`
+[![npm version](https://img.shields.io/npm/v/%40stackline%2Floader-utils)](https://www.npmjs.com/package/@stackline/loader-utils)
+[![CI](https://github.com/alexandroit/stackline-loader-utils/actions/workflows/ci.yml/badge.svg)](https://github.com/alexandroit/stackline-loader-utils/actions/workflows/ci.yml)
+[![license](https://img.shields.io/npm/l/%40stackline%2Floader-utils)](LICENSE)
 
-Converts some resource URL to a webpack module request.
+## Why This Fork Exists
 
-> i Before call `urlToRequest` you need call `isUrlRequest` to ensure it is requestable url
+The upstream `webpack/loader-utils` repository was archived in March 2025. Stackline maintains this fork so projects can retain the established API while using an actively tested package with:
 
-```javascript
-const url = "path/to/module.js";
+- zero production dependencies;
+- clean direct and legacy-name installations;
+- zero known npm audit vulnerabilities;
+- regression and differential tests against `loader-utils@3.3.1`;
+- Node.js 12.13 through current Node.js compatibility checks;
+- TypeScript declarations validated with TypeScript 3.9 and current TypeScript;
+- reproducible release artifacts, SBOMs and immutable GitHub releases.
 
-if (loaderUtils.isUrlRequest(url)) {
-  // Logic for requestable url
-  const request = loaderUtils.urlToRequest(url);
-} else {
-  // Logic for not requestable url
+This is an independent fork and is not affiliated with webpack or the JS Foundation.
+
+## Install
+
+New projects can use the scoped name:
+
+```bash
+npm install @stackline/loader-utils
+```
+
+```js
+const loaderUtils = require("@stackline/loader-utils");
+```
+
+For an existing project that imports `loader-utils`, use an npm alias and keep every source import unchanged:
+
+```bash
+npm install loader-utils@npm:@stackline/loader-utils
+```
+
+```js
+const loaderUtils = require("loader-utils");
+```
+
+## API
+
+### `isUrlRequest(url)`
+
+Returns whether a URL should be handled as a webpack request.
+
+```js
+if (loaderUtils.isUrlRequest("images/logo.svg")) {
+  // Handle the value as a module request.
 }
 ```
 
-Simple example:
+### `urlToRequest(url, root?)`
 
-```javascript
-const url = "path/to/module.js";
-const request = loaderUtils.urlToRequest(url); // "./path/to/module.js"
+Converts a resource URL to a webpack module request.
+
+```js
+loaderUtils.urlToRequest("styles/main.css");
+// "./styles/main.css"
+
+loaderUtils.urlToRequest("/images/logo.svg", "/public");
+// "/public/images/logo.svg"
 ```
 
-#### Module URLs
+### `interpolateName(loaderContext, name?, options?)`
 
-Any URL containing a `~` will be interpreted as a module request. Anything after the `~` will be considered the request path.
+Interpolates `[ext]`, `[name]`, `[path]`, `[folder]`, `[query]`, `[hash]` and `[contenthash]` filename tokens.
 
-```javascript
-const url = "~path/to/module.js";
-const request = loaderUtils.urlToRequest(url); // "path/to/module.js"
-```
-
-#### Root-relative URLs
-
-URLs that are root-relative (start with `/`) can be resolved relative to some arbitrary path by using the `root` parameter:
-
-```javascript
-const url = "/path/to/module.js";
-const root = "./root";
-const request = loaderUtils.urlToRequest(url, root); // "./root/path/to/module.js"
-```
-
-To convert a root-relative URL into a module URL, specify a `root` value that starts with `~`:
-
-```javascript
-const url = "/path/to/module.js";
-const root = "~";
-const request = loaderUtils.urlToRequest(url, root); // "path/to/module.js"
-```
-
-### `interpolateName`
-
-Interpolates a filename template using multiple placeholders and/or a regular expression.
-The template and regular expression are set as query params called `name` and `regExp` on the current loader's context.
-
-```javascript
-const interpolatedName = loaderUtils.interpolateName(
-  loaderContext,
-  name,
-  options
+```js
+const filename = loaderUtils.interpolateName(
+  { resourcePath: "/src/logo.svg" },
+  "assets/[name].[contenthash:8].[ext]",
+  { content: Buffer.from("file contents") }
 );
 ```
 
-The following tokens are replaced in the `name` parameter:
+Supported digest templates include `xxhash64`, `md4`, `native-md4`, Node.js crypto algorithms, `hex`, `base26`, `base32`, `base36`, `base49`, `base52`, `base58`, `base62`, `base64` and `base64safe`.
 
-- `[ext]` the extension of the resource
-- `[name]` the basename of the resource
-- `[path]` the path of the resource relative to the `context` query parameter or option.
-- `[folder]` the folder the resource is in
-- `[query]` the queryof the resource, i.e. `?foo=bar`
-- `[contenthash]` the hash of `options.content` (Buffer) (by default it's the hex digest of the `xxhash64` hash)
-- `[<hashType>:contenthash:<digestType>:<length>]` optionally one can configure
-  - other `hashType`s, i. e. `xxhash64`, `sha1`, `md4` (wasm version), `native-md4` (`crypto` module version), `md5`, `sha256`, `sha512`
-  - other `digestType`s, i. e. `hex`, `base26`, `base32`, `base36`, `base49`, `base52`, `base58`, `base62`, `base64`, `base64safe`
-  - and `length` the length in chars
-- `[hash]` the hash of `options.content` (Buffer) (by default it's the hex digest of the `xxhash64` hash)
-- `[<hashType>:hash:<digestType>:<length>]` optionally one can configure
-  - other `hashType`s, i. e. `xxhash64`, `sha1`, `md4` (wasm version), `native-md4` (`crypto` module version), `md5`, `sha256`, `sha512`
-  - other `digestType`s, i. e. `hex`, `base26`, `base32`, `base36`, `base49`, `base52`, `base58`, `base62`, `base64`, `base64safe`
-  - and `length` the length in chars
-- `[N]` the N-th match obtained from matching the current file name against `options.regExp`
+### `getHashDigest(buffer, hashType?, digestType?, maxLength?)`
 
-In loader context `[hash]` and `[contenthash]` are the same, but we recommend using `[contenthash]` for avoid misleading.
+Creates a loader-compatible content digest.
 
-`digestType` with `base64safe` don't contain `/`, `+` and `=` symbols.
-
-Examples
-
-```javascript
-// loaderContext.resourcePath = "/absolute/path/to/app/js/javascript.js"
-loaderUtils.interpolateName(loaderContext, "js/[hash].script.[ext]", { content: ... });
-// => js/9473fdd0d880a43c21b7778d34872157.script.js
-
-// loaderContext.resourcePath = "/absolute/path/to/app/js/javascript.js"
-// loaderContext.resourceQuery = "?foo=bar"
-loaderUtils.interpolateName(loaderContext, "js/[hash].script.[ext][query]", { content: ... });
-// => js/9473fdd0d880a43c21b7778d34872157.script.js?foo=bar
-
-// loaderContext.resourcePath = "/absolute/path/to/app/js/javascript.js"
-loaderUtils.interpolateName(loaderContext, "js/[contenthash].script.[ext]", { content: ... });
-// => js/9473fdd0d880a43c21b7778d34872157.script.js
-
-// loaderContext.resourcePath = "/absolute/path/to/app/page.html"
-loaderUtils.interpolateName(loaderContext, "html-[hash:6].html", { content: ... });
-// => html-9473fd.html
-
-// loaderContext.resourcePath = "/absolute/path/to/app/flash.txt"
-loaderUtils.interpolateName(loaderContext, "[hash]", { content: ... });
-// => c31e9820c001c9c4a86bce33ce43b679
-
-// loaderContext.resourcePath = "/absolute/path/to/app/img/image.png"
-loaderUtils.interpolateName(loaderContext, "[sha512:hash:base64:7].[ext]", { content: ... });
-// => 2BKDTjl.png
-// use sha512 hash instead of xxhash64 and with only 7 chars of base64
-
-// loaderContext.resourcePath = "/absolute/path/to/app/img/myself.png"
-// loaderContext.query.name =
-loaderUtils.interpolateName(loaderContext, "picture.png");
-// => picture.png
-
-// loaderContext.resourcePath = "/absolute/path/to/app/dir/file.png"
-loaderUtils.interpolateName(loaderContext, "[path][name].[ext]?[hash]", { content: ... });
-// => /app/dir/file.png?9473fdd0d880a43c21b7778d34872157
-
-// loaderContext.resourcePath = "/absolute/path/to/app/js/page-home.js"
-loaderUtils.interpolateName(loaderContext, "script-[1].[ext]", { regExp: "page-(.*)\\.js", content: ... });
-// => script-home.js
-
-// loaderContext.resourcePath = "/absolute/path/to/app/js/javascript.js"
-// loaderContext.resourceQuery = "?foo=bar"
-loaderUtils.interpolateName(
-  loaderContext,
-  (resourcePath, resourceQuery) => {
-    // resourcePath - `/app/js/javascript.js`
-    // resourceQuery - `?foo=bar`
-
-    return "js/[hash].script.[ext]";
-  },
-  { content: ... }
-);
-// => js/9473fdd0d880a43c21b7778d34872157.script.js
-```
-
-### `getHashDigest`
-
-```javascript
-const digestString = loaderUtils.getHashDigest(
-  buffer,
-  hashType,
-  digestType,
-  maxLength
+```js
+loaderUtils.getHashDigest(
+  Buffer.from("file contents"),
+  "sha256",
+  "base64safe",
+  12
 );
 ```
 
-- `buffer` the content that should be hashed
-- `hashType` one of `xxhash64`, `sha1`, `md4`, `md5`, `sha256`, `sha512` or any other node.js supported hash type
-- `digestType` one of `hex`, `base26`, `base32`, `base36`, `base49`, `base52`, `base58`, `base62`, `base64`, `base64safe`
-- `maxLength` the maximum length in chars
+## Compatibility
 
-## License
+| Surface | Support |
+| --- | --- |
+| Runtime | Node.js 12.13+ |
+| Modules | CommonJS, dynamic ESM import |
+| TypeScript | 3.9 and current |
+| Baseline | `loader-utils@3.3.1` |
+| Deep imports | Preserved |
+| Production dependencies | 0 |
 
-MIT (http://www.opensource.org/licenses/mit-license.php)
+The scoped package uses its own `1.x` release line. `@stackline/loader-utils@1.0.0` corresponds to the maintained `loader-utils@3.3.1` API baseline.
+
+## Verification
+
+```bash
+npm ci
+npm run verify
+```
+
+The release gate runs linting, the complete upstream suite, differential compatibility tests, security regressions, TypeScript 3.9/current checks, coverage thresholds, direct and alias installation smoke tests, package validation and full/prod npm audits.
+
+## Documentation
+
+- [Migration guide](MIGRATION.md)
+- [Compatibility policy](COMPATIBILITY.md)
+- [Security policy](SECURITY.md)
+- [Public documentation](https://alexandro.net/docs/vanilla/loader-utils/)
+
+## License and Attribution
+
+MIT. The original copyright and license are preserved in [LICENSE](LICENSE). See [NOTICE](NOTICE) and [THIRD_PARTY_LICENSES.md](THIRD_PARTY_LICENSES.md) for provenance and attribution.

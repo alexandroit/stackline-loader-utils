@@ -1,5 +1,6 @@
 "use strict";
 
+const { describe, expect, it, test } = require("./helpers");
 const loaderUtils = require("../");
 
 describe("getHashDigest()", () => {

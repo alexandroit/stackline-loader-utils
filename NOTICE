@@ -1,0 +1,11 @@
+@stackline/loader-utils
+
+This package is an independently maintained fork derived from loader-utils,
+originally developed by Tobias Koppers, the JS Foundation and other
+contributors.
+
+Upstream source: https://github.com/webpack/loader-utils
+Upstream baseline: loader-utils 3.3.1, commit 06fcc0aac9928779d5e2e0fdc58dddd5d4c49ea3
+
+The original MIT copyright and permission notice are preserved in LICENSE.
+Stackline is not affiliated with or endorsed by webpack or the JS Foundation.

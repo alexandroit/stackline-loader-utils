@@ -1,5 +1,6 @@
 "use strict";
 
+const { describe, expect, it } = require("./helpers");
 const loaderUtils = require("../");
 
 function ExpectedError(regex) {
