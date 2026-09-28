@@ -1,6 +1,6 @@
 {
   "name": "@stackline/loader-utils",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Maintained, security-hardened fork compatible with loader-utils 2.0.4 consumers",
   "type": "commonjs",
   "main": "./lib/index.js",
@@ -54,7 +54,8 @@
     "hash",
     "interpolate-name",
     "build-tools",
-    "stackline"
+    "stackline",
+    "utilities"
   ],
   "author": "Stackline Maintainers",
   "contributors": [
