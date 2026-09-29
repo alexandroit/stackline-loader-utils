@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.0.4 - 2026-09-28
+
+- Pin verified Stackline maintenance forks under the existing dependency import names; see `DEPENDENCY_UPDATES.md`.
+- Preserve the package API, supported runtimes, upstream comparison tests, and original licenses.
+
 ## [1.0.3] - 2026-09-28
 
 - Organize package documentation, preserve API and migration examples, and add Stackline community links.

@@ -1,5 +1,7 @@
 # Third-Party Licenses
 
+Current direct installations use `emojis-list: npm:@stackline/emojis-list@1.0.0` and `json5: npm:@stackline/json5@1.0.0`. Their runtime payload and original MIT license texts match the upstream baselines below; see [DEPENDENCY_UPDATES.md](DEPENDENCY_UPDATES.md) for release evidence. The original license filenames are retained as attribution to those baselines.
+
 ## Production Dependencies
 
 | Component | License | Shipped text |

@@ -17,13 +17,15 @@ const json5ShippedLicense = await readFile("licenses/json5-2.2.3-MIT.txt", "utf8
 const notices = await readFile("THIRD_PARTY_LICENSES.md", "utf8");
 
 assert.deepEqual(packageJson.dependencies, {
-  "emojis-list": "3.0.0",
-  json5: "2.2.3",
+  "emojis-list": "npm:@stackline/emojis-list@1.0.0",
+  json5: "npm:@stackline/json5@1.0.0",
 });
-assert.equal(emojis.version, "3.0.0");
+assert.equal(emojis.name, "@stackline/emojis-list");
+assert.equal(emojis.version, "1.0.0");
 assert.equal(emojis.license, "MIT");
 assert.deepEqual(emojis.dependencies || {}, {});
-assert.equal(json5.version, "2.2.3");
+assert.equal(json5.name, "@stackline/json5");
+assert.equal(json5.version, "1.0.0");
 assert.equal(json5.license, "MIT");
 assert.equal(emojiShippedLicense, emojiSourceLicense);
 assert.equal(json5ShippedLicense, json5SourceLicense);

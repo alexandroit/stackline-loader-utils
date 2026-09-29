@@ -1,5 +1,7 @@
 # Production Dependency Review
 
+Current direct installations use `emojis-list: npm:@stackline/emojis-list@1.0.0` and `json5: npm:@stackline/json5@1.0.0`. Their runtime payload and original MIT license texts match the upstream baselines below; see [DEPENDENCY_UPDATES.md](DEPENDENCY_UPDATES.md) for release evidence. The original license filenames are retained as attribution to those baselines.
+
 Review date: 2026-08-30. Recheck by: 2026-11-30.
 
 | Dependency | Exact version | Runtime dependencies | Maintenance evidence | Decision |

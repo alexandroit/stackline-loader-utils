@@ -11,7 +11,7 @@
 **[Issues](https://github.com/alexandroit/stackline-loader-utils/issues)** |
 **[Repository](https://github.com/alexandroit/stackline-loader-utils)**
 
-**Package version:** `1.0.3`
+**Package version:** `1.0.4`
 
 ## Why this package?
 
@@ -37,7 +37,7 @@ This is an independent fork and is not affiliated with webpack or the JS Foundat
 
 | Item | Value |
 | --- | --- |
-| Package | `@stackline/loader-utils@1.0.3` |
+| Package | `@stackline/loader-utils@1.0.4` |
 | Node.js runtime | `>=12.13.0` |
 | CommonJS / primary entry | `./lib/index.js` |
 | Type declarations | `./index.d.ts` |
@@ -49,7 +49,7 @@ This is an independent fork and is not affiliated with webpack or the JS Foundat
 | TypeScript | 3.9 and current |
 | Baseline | Complete `loader-utils@2.0.4` API |
 | Deep imports | Preserved |
-| Production dependencies | `emojis-list@3.0.0`, `json5@2.2.3` (both leaf packages) |
+| Production dependencies | `emojis-list: npm:@stackline/emojis-list@1.0.0`, `json5: npm:@stackline/json5@1.0.0` (both leaf packages) |
 
 The scoped package uses its own `1.x` release line. `@stackline/loader-utils@1.0.3` is the first public release, validated against the complete `2.0.4` contract and real `resolve-url-loader` Webpack 4/5 builds.
 
@@ -211,3 +211,5 @@ Report reproducible package issues in the [issue tracker](https://github.com/ale
 ### License and Attribution
 
 MIT. The original copyright and license are preserved in [LICENSE](https://github.com/alexandroit/stackline-loader-utils/blob/main/LICENSE). See [NOTICE](https://github.com/alexandroit/stackline-loader-utils/blob/main/NOTICE) and [THIRD_PARTY_LICENSES.md](https://github.com/alexandroit/stackline-loader-utils/blob/main/THIRD_PARTY_LICENSES.md) for provenance and attribution.
+
+Dependency maintenance for this release is documented in [DEPENDENCY_UPDATES.md](DEPENDENCY_UPDATES.md).
