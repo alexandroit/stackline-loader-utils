@@ -4,13 +4,13 @@
 
 [![npm version](https://img.shields.io/npm/v/@stackline/loader-utils.svg?style=flat-square)](https://www.npmjs.com/package/@stackline/loader-utils)
 [![license](https://img.shields.io/npm/l/@stackline/loader-utils.svg?style=flat-square)](https://github.com/alexandroit/stackline-loader-utils)
-[![GitHub repository](https://img.shields.io/badge/GitHub-alexandroit%2Fstackline-loader-utils-181717?style=flat-square&logo=github)](https://github.com/alexandroit/stackline-loader-utils)
+[![GitHub repository](https://img.shields.io/badge/GitHub-repository-181717?style=flat-square&logo=github)](https://github.com/alexandroit/stackline-loader-utils)
 [![Docs](https://img.shields.io/badge/docs-alexandro.net-0f766e?style=flat-square)](https://alexandro.net/docs/vanilla/loader-utils/)
 [![Reddit community](https://img.shields.io/badge/community-r%2FStackline-ff4500?style=flat-square&logo=reddit&logoColor=white)](https://www.reddit.com/r/Stackline/)
 
 **[Documentation](https://alexandro.net/docs/vanilla/loader-utils/)** | **[npm](https://www.npmjs.com/package/@stackline/loader-utils)** | **[Issues](https://github.com/alexandroit/stackline-loader-utils/issues)** | **[Repository](https://github.com/alexandroit/stackline-loader-utils)**
 
-**Current package version:** `1.0.5`
+**Current package version:** `1.0.6`
 
 ---
 
@@ -38,7 +38,7 @@ This is an independent fork and is not affiliated with webpack or the JS Foundat
 
 | Item | Value |
 | --- | --- |
-| Package | `@stackline/loader-utils@1.0.5` |
+| Package | `@stackline/loader-utils@1.0.6` |
 | Node.js runtime | `>=12.13.0` |
 | CommonJS / primary entry | `./lib/index.js` |
 | Type declarations | `./index.d.ts` |

@@ -4,7 +4,7 @@
     {
       "name": "@stackline/loader-utils",
       "path": "README.md",
-      "version": "1.0.5",
+      "version": "1.0.6",
       "baselineVersion": "1.0.4",
       "keywords": [
         "stackline",
@@ -22,8 +22,8 @@
       "homepage": "https://alexandro.net/docs/vanilla/loader-utils/",
       "baselineTarball": "https://registry.npmjs.org/@stackline/loader-utils/-/loader-utils-1.0.4.tgz",
       "baselineIntegrity": "sha512-flokLGXL+mdUGX96fand0bluUVm6gkD8ZFGxjZv+yebY/SM0VBcJVnoBhnulgl1cwUShT2IVu+XpoX7KGZg19Q==",
-      "expectedSha512": "b7905dc974627f5d372be5864a042d0a1b6d7e134c572fd2c6db5191e46afa57ad915668afe54bf5a2c1a7e307039ee6c9c2430259ca6854179d239d05b038b3",
-      "tag": "docs-stackline-loader-utils-v1.0.5"
+      "expectedSha512": "5407860d70cc19e206261aeb41960894beee36bf0b6cfefc9e077feb1508cba821896353979ba58ef8cebf2f3a549429dc9614f97aab32b08b0015f237229550",
+      "tag": "docs-stackline-loader-utils-v1.0.6"
     }
   ]
 }
