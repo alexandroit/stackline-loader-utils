@@ -1,17 +1,18 @@
 # @stackline/loader-utils
 
-> Maintained, security-hardened fork compatible with loader-utils 2.0.4 consumers
+> Maintained, security-hardened fork compatible with loader-utils 2.0.4 consumers.
 
 [![npm version](https://img.shields.io/npm/v/@stackline/loader-utils.svg?style=flat-square)](https://www.npmjs.com/package/@stackline/loader-utils)
-[![license](https://img.shields.io/npm/l/@stackline/loader-utils.svg?style=flat-square)](https://github.com/alexandroit/stackline-loader-utils/blob/main/LICENSE)
-[![GitHub repository](https://img.shields.io/badge/GitHub-Repository-181717?style=flat-square&logo=github)](https://github.com/alexandroit/stackline-loader-utils)
+[![license](https://img.shields.io/npm/l/@stackline/loader-utils.svg?style=flat-square)](https://github.com/alexandroit/stackline-loader-utils)
+[![GitHub repository](https://img.shields.io/badge/GitHub-alexandroit%2Fstackline-loader-utils-181717?style=flat-square&logo=github)](https://github.com/alexandroit/stackline-loader-utils)
+[![Docs](https://img.shields.io/badge/docs-alexandro.net-0f766e?style=flat-square)](https://alexandro.net/docs/vanilla/loader-utils/)
+[![Reddit community](https://img.shields.io/badge/community-r%2FStackline-ff4500?style=flat-square&logo=reddit&logoColor=white)](https://www.reddit.com/r/Stackline/)
 
-**[Documentation](https://alexandro.net/docs/vanilla/loader-utils/)** |
-**[npm](https://www.npmjs.com/package/@stackline/loader-utils)** |
-**[Issues](https://github.com/alexandroit/stackline-loader-utils/issues)** |
-**[Repository](https://github.com/alexandroit/stackline-loader-utils)**
+**[Documentation](https://alexandro.net/docs/vanilla/loader-utils/)** | **[npm](https://www.npmjs.com/package/@stackline/loader-utils)** | **[Issues](https://github.com/alexandroit/stackline-loader-utils/issues)** | **[Repository](https://github.com/alexandroit/stackline-loader-utils)**
 
-**Package version:** `1.0.4`
+**Current package version:** `1.0.5`
+
+---
 
 ## Why this package?
 
@@ -37,7 +38,7 @@ This is an independent fork and is not affiliated with webpack or the JS Foundat
 
 | Item | Value |
 | --- | --- |
-| Package | `@stackline/loader-utils@1.0.4` |
+| Package | `@stackline/loader-utils@1.0.5` |
 | Node.js runtime | `>=12.13.0` |
 | CommonJS / primary entry | `./lib/index.js` |
 | Type declarations | `./index.d.ts` |
@@ -195,15 +196,6 @@ The release gate runs linting, the complete upstream suite, differential compati
 
 Run `npm run verify` and inspect the package contents before release. Publish a new version through the [GitHub Actions publishing workflow](https://github.com/alexandroit/stackline-loader-utils/actions/workflows/publish.yml), using the SHA-512 digest of the reviewed tarball. Verify the exact published version, tarball integrity, and npm provenance after the run.
 
-## Community and Support
-
-Report reproducible package issues in the [issue tracker](https://github.com/alexandroit/stackline-loader-utils/issues). Use the [security policy](https://github.com/alexandroit/stackline-loader-utils/blob/main/SECURITY.md) for vulnerability reports.
-
-- [Stackline / Alexandro.Net](https://alexandro.net/)
-- [GitHub](https://github.com/alexandroit)
-- [Maintainer LinkedIn](https://www.linkedin.com/in/aleinfo/)
-- [Reddit community: r/Stackline](https://www.reddit.com/r/Stackline/)
-
 ## License
 
 <a id="license-and-attribution"></a>
@@ -213,3 +205,22 @@ Report reproducible package issues in the [issue tracker](https://github.com/ale
 MIT. The original copyright and license are preserved in [LICENSE](https://github.com/alexandroit/stackline-loader-utils/blob/main/LICENSE). See [NOTICE](https://github.com/alexandroit/stackline-loader-utils/blob/main/NOTICE) and [THIRD_PARTY_LICENSES.md](https://github.com/alexandroit/stackline-loader-utils/blob/main/THIRD_PARTY_LICENSES.md) for provenance and attribution.
 
 Dependency maintenance for this release is documented in [DEPENDENCY_UPDATES.md](DEPENDENCY_UPDATES.md).
+
+## Credits and original authors
+
+- Stackline Maintainers.
+- Tobias Koppers.
+- JS Foundation and other contributors.
+- Stackline maintenance: [Alexandro Paixao Marques](https://www.linkedin.com/in/aleinfo/) and [Stackline contributors](https://github.com/alexandroit).
+
+Original copyright, license notices and contributor acknowledgements remain part of this distribution. Stackline maintenance does not replace authorship of the original work.
+
+## Community and Links
+
+- [Stackline website](https://alexandro.net/)
+- [GitHub projects](https://github.com/alexandroit)
+- [npm packages](https://www.npmjs.com/~alex360qc)
+- [Reddit community — r/Stackline](https://www.reddit.com/r/Stackline/)
+- [Maintainer LinkedIn](https://www.linkedin.com/in/aleinfo/)
+
+Use this repository's issue tracker for reproducible bugs and feature requests. Join r/Stackline for examples, usage questions and release discussions.

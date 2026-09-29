@@ -1,6 +1,6 @@
 {
   "name": "@stackline/loader-utils",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "Maintained, security-hardened fork compatible with loader-utils 2.0.4 consumers",
   "type": "commonjs",
   "main": "./lib/index.js",
@@ -49,13 +49,16 @@
     "url": "https://github.com/alexandroit/stackline-loader-utils/issues"
   },
   "keywords": [
+    "stackline",
+    "npm-package",
+    "loader-utils",
+    "typescript",
+    "nodejs",
     "webpack",
     "loader",
-    "loader-utils",
     "hash",
     "interpolate-name",
     "build-tools",
-    "stackline",
     "utilities"
   ],
   "author": "Stackline Maintainers",
